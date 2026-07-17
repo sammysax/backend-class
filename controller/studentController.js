@@ -35,6 +35,8 @@
 
 import {Student} from "../model/student.js";
 
+
+// Create a new student
 export const createStudent = async (req, res) => {
   try {
     const { name, email, grade, age } = req.body;
@@ -52,7 +54,49 @@ export const createStudent = async (req, res) => {
     }
   };
 
+  //delete a student by ID
+  export const deleteStudent = async (req, res) => {
+    const { id } = req.body;
 
+    try {
+      const student = await Student.findByIdAndDelete(id);
+
+      if (!student) {
+        return res.status(404).json({ message: "Student not found" });
+      }
+
+      res.status(200).json({
+        message: "Student deleted successfully",
+        student
+      });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
+
+  // Update a student by ID
+  export const updateStudent = async (req, res) => {
+    const { id, name, email, grade, age } = req.body;
+
+    try {
+
+      const student = await Student.findByIdAndUpdate(id, { name, email, grade, age }, { new: true });
+
+      if (!student) {
+        return res.status(404).json({ message: "Student not found" });
+      }
+
+      res.status(200).json({
+        message: "Student updated successfully",
+        student
+      });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  // Get all students
   export const getStudent = async (req, res) => {
     try {
       const students = await Student.find();
