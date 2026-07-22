@@ -15,7 +15,7 @@ await connectDB();
 const app = express();
 app.use(express.json());
 app.use(cors({ 
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://opay-front-end.vercel.app/"],
   methods: ["POST", "GET", "PUT", "DELETE"],
   allowedHeaders: ["X-API-KEY", "Content-Type"],
   credentials: true
