@@ -15,8 +15,8 @@ await connectDB();
 const app = express();
 app.use(express.json());
 app.use(cors({ 
-  origin: "https://opayy.vercel.app/",
-  methods: ["POST", "GET", "PUT", "DELETE"],
+  origin: ["http://localhost:3000", "https://opayy.vercel.app"],
+  methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["X-API-KEY", "Content-Type"],
   credentials: true
  }));
